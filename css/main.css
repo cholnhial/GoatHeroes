@@ -31,19 +31,21 @@
 
 
 
+.action-button {
+    position: relative;
+    top: 90%;
+    left: 5rem;
+}
+
+.banner {
+    background: url('../img/banner.png') no-repeat center center;
+    background-size: cover;
+    background-position-y: 30px;
+    height: 550px;
+}
+
 /* Desktops and Laptops */
 @media (min-width: 1025px) and (max-width: 1280px) {
-
-    .banner {
-        margin-top: 3%;
-    }
-
-    .action-button {
-        position: relative;
-        bottom: 12rem;
-        left: 5rem;
-
-    }
 
 }
 
@@ -51,12 +53,15 @@
 @media (min-width: 320px) and (max-width: 480px) {
 
     .banner {
-        margin-top: 13%;
+        background-position-y: 60%;
+        background-size: contain;
+        height: 18rem;
+        width: auto;
     }
 
     .action-button {
         position: relative;
-        bottom: 4rem;
+        top: 67%;
         left: 50%;
         transform: translateX(-50%);
     }
