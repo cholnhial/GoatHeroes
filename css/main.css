@@ -8,7 +8,7 @@
     font-family: Roboto, sans-serif;
 }
 
-.navbar-brand {
+.navbar-brand, .footer-logo {
     height: 3rem;
 }
 
@@ -29,6 +29,19 @@
     background-color: var(--ghthirdary);
 }
 
+.footer-nav-link {
+    color: white;
+}
+
+.footer-nav-link:visited {
+    color: white;
+}
+
+
+.footer-nav-link:hover {
+    color:white;
+    filter: brightness(80%);
+}
 
 
 .action-button {
