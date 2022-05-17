@@ -50,6 +50,10 @@
     left: 5rem;
 }
 
+.tbutton:hover {
+    font-size: 4em;
+}
+
 .banner {
     background: url('../img/banner.png') no-repeat center center;
     background-size: cover;
