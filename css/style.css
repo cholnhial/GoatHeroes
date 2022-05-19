@@ -61,6 +61,17 @@
     height: 550px;
 }
 
+.form-background {
+    margin: 5% auto;
+    width: 60%;
+    color: white;
+    padding: 6rem;
+    /* #273C2C */
+    background-image: url("/images/noise.png");
+    background-repeat: repeat;
+    border-radius: 5px;
+}
+
 /* Desktops and Laptops */
 @media (min-width: 1025px) and (max-width: 1280px) {
 
@@ -68,6 +79,18 @@
 
 /* Smartphones */
 @media (min-width: 320px) and (max-width: 480px) {
+
+    .form-background {
+        margin: 5% auto;
+        width: auto;
+        color: white;
+        padding: 1rem;
+        /* #273C2C */
+        background-image: url("/images/noise.png");
+        background-repeat: repeat;
+        border-radius: 5px;
+    }
+
 
     .banner {
         background-position-y: 60%;
