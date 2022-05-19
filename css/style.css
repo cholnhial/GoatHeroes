@@ -55,7 +55,7 @@
 }
 
 .banner {
-    background: url('../img/banner.png') no-repeat center center;
+    background: url('../images/banner.png') no-repeat center center;
     background-size: cover;
     background-position-y: 30px;
     height: 550px;
@@ -101,3 +101,72 @@
 .text-green {
     color: var(--ghprimary)
 }
+
+.page-title {
+    padding: 5rem;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    font-size: 2.5em;
+    background-color: #d96c06;
+}
+
+/* Animations for Fading In from Left */
+.animate__object {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+.move__fadeInLeft {
+    animation-name: fadeInLeft;
+}
+
+@-webkit-keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+.move__fadeInRight {
+    animation-name: fadeInRight;
+}
+
+/* End Animations */
+
