@@ -175,7 +175,7 @@ work.
         <textarea class="form-control" id="notes" rows="5"></textarea>
       </div>
       <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-outline-success btn-lg mt-4">SUBMIT</button>
+        <button type="submit" disabled id="submitBooking" class="btn btn-outline-success btn-lg mt-4">SUBMIT</button>
       </div>
     </form>
   </div>
@@ -257,7 +257,10 @@ work.
 
 <!-- Page specific JavaScript -->
 <script>
-  configureInputValidation(bookingFormValidationConfig);
+  configureInputValidation(bookingFormValidationConfig, (valid) => {
+    console.log(valid);
+    $('#submitBooking').prop('disabled', !valid);
+  });
 </script>
 </body>
 </html>

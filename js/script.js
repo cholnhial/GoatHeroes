@@ -33,7 +33,7 @@ let bookingFormValidationConfig = [
         rules: [
             {
                 pattern: NON_EMPTY_PATTERN,
-                message: "Please specify your home address",
+                message: "Please specify your home address"
             }
         ]
     },
@@ -42,7 +42,7 @@ let bookingFormValidationConfig = [
         rules: [
             {
                 pattern: NON_EMPTY_PATTERN,
-                message: "Please specify your postcode",
+                message: "Please specify your postcode"
             },
             {
                 pattern: NUMERIC_PATTERN,
@@ -55,7 +55,7 @@ let bookingFormValidationConfig = [
         rules: [
             {
                 pattern: NON_EMPTY_PATTERN,
-                message: "Your first name cannot be empty",
+                message: "Your first name cannot be empty"
             }
         ]
     },
@@ -64,7 +64,7 @@ let bookingFormValidationConfig = [
         rules: [
             {
                 pattern: NON_EMPTY_PATTERN,
-                message: "Your last name cannot be empty",
+                message: "Your last name cannot be empty"
             }
         ]
     },
@@ -73,11 +73,11 @@ let bookingFormValidationConfig = [
         rules: [
             {
                 pattern: NON_EMPTY_PATTERN,
-                message: "Your email can't be empty",
+                message: "Your email can't be empty"
             },
             {
                 pattern: EMAIL_PATTERN,
-                message: "The email you've entered is not in a valid format",
+                message: "The email you've entered is not in a valid format"
             }
         ]
     },
@@ -86,11 +86,11 @@ let bookingFormValidationConfig = [
         rules: [
             {
                 pattern: NON_EMPTY_PATTERN,
-                message: "Your phone can't be empty",
+                message: "Your phone can't be empty"
             },
             {
                 pattern: NUMERIC_PATTERN,
-                message: "Your phone number must only contain numbers",
+                message: "Your phone number must only contain numbers"
             }
         ]
     }
@@ -113,9 +113,11 @@ function runValidationForInput(inputId,value, validationsConfig) {
            $(`#${inputId}-error`).removeClass('d-none');
            $(`#${inputId}`).removeClass('is-valid');
            $(`#${inputId}`).addClass('is-invalid');
+           inputValidationConfig.rules[i].isValid = false;
            break; // always display immediate error first, don't overwrite
        } else {
            $(`#${inputId}`).removeClass('is-invalid');
+           inputValidationConfig.rules[i].isValid = true;
            $(`#${inputId}-error`).addClass('d-none');
            $(`#${inputId}`).addClass('is-valid');
        }
@@ -126,17 +128,39 @@ function runValidationForInput(inputId,value, validationsConfig) {
  * Connects to an inputs keyup event and fires the validation
  * method to display warnings
  * @param validationsConfig
+ * @param onSuccess a callback function to call when form validation is performed
+ *  it is passed the form validation state, true if the form is valid false otherwise
  */
-function configureInputValidation(validationsConfig) {
+function configureInputValidation(validationsConfig, onSuccess) {
     validationsConfig.forEach(vc => {
         $(`#${vc.input}`).on('keyup', (e) => {
             runValidationForInput(vc.input, e.target.value, bookingFormValidationConfig);
+            if(isFormValid(validationsConfig)) {
+                onSuccess(true); // call callback function
+            } else {
+                onSuccess(false);
+            }
         })
     });
 }
 
-
-
+/**
+ * Checks whether all the validation rules for the form are not violated
+ *
+ * @param validationsConfig
+ * @returns {boolean} true if the form is valid, false otherwise
+ */
+function isFormValid(validationsConfig) {
+    // process rules and display warnings
+    for(let i = 0; i < validationsConfig.length; i++) {
+        for(let j = 0; j < validationsConfig[i].rules.length; j++) {
+            if(!$(`#${validationsConfig[i].input}`).val().match(validationsConfig[i].rules[j].pattern)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
 /**
  *  Triggers animation
