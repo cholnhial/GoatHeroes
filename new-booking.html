@@ -83,7 +83,7 @@ work.
 <main class="flex-shrink-0">
   <div class="page-title">NEW BOOKING</div>
   <div class="container">
-    <form class="form-background">
+    <form id="bookingForm" class="form-background">
        <fieldset>
          <legend>Property & Time</legend>
          <label for="property" class="form-label">Property</label>
@@ -178,6 +178,16 @@ work.
         <button type="submit" disabled id="submitBooking" class="btn btn-outline-success btn-lg mt-4">SUBMIT</button>
       </div>
     </form>
+    <div id="formSubmitLoading" class="mt-3 d-none text-center">
+        <div class="loading-spinner spinner-border"></div>
+      <p class="fs-4 text-green">Submitting. Please wait...</p>
+      <p class="fs-6 text-muted">Do not close your browser window</p>
+    </div>
+    <div id="formSubmitSuccess" class="mt-3 mb-3 d-none text-center">
+      <i class="fas fa-check-circle fa-5x text-green"></i>
+      <p class="fs-4 text-green">You form has been successfully submitted. We will get in touch!</p>
+      <a href="index.html" class="btn btn-outline-success btn-lg"><i class="fas fa-home fa-2x"></i> HOME</a>
+    </div>
   </div>
 </main>
 
@@ -259,6 +269,16 @@ work.
 <script>
   configureInputValidation(bookingFormValidationConfig, (valid) => {
     $('#submitBooking').prop('disabled', !valid);
+    $('#bookingForm').submit(function(e) {
+      $('#bookingForm').addClass('d-none'); // hide form
+      $('#formSubmitLoading').removeClass('d-none'); // show loading
+      setTimeout(function() { // wait five seconds before showing success
+        $('#formSubmitLoading').addClass('d-none');// hide loading
+        $('#formSubmitSuccess').removeClass('d-none'); // show success
+      }, 5000);
+        e.preventDefault();
+
+    });
   });
 </script>
 </body>

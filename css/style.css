@@ -77,6 +77,12 @@
     transition: 0.3s;
 }
 
+.loading-spinner {
+    color: var(--ghprimary);
+    height: 64px;
+    width: 64px;
+}
+
 .chat-with-us:hover {
     width: 68px;
     height: 68px;
