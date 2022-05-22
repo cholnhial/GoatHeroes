@@ -1,30 +1,9 @@
-<!------------------
-Please note that Bootstrap 5 has been used  on this page and several others.
-All JavaScript code in script.js and other files is all my own code.
-The HTML is my own code the only thing that isn't mine is the styling
-provided by Bootstrap all custom files contain 100% my work.
 
-Bootstrap classes have been applied to style HTML elements.
-
-Bootstrap Grid, FlexBox and other layout utilities have been utilised
-to make layout and styling easier.
-
-Custom style has been incorporated and can be found in css/style.css.
-This should demonstrate my knowledge of CSS.
-All HTML files demonstrate my knowledge and understanding of HTML.
-
-If the marker understands Bootstrap it will be easy to recognise what is mine and
-what isn't. I'm well aware we were not encouraged to use Bootstrap. However, I found
-it appropriate as I have experience using it.
-
-Please note that the webfonts folder has to be in the root. Otherwise, FontAwesome won't
-work.
-!-->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>GoatHeroes | Home</title>
+  <title>GoatHeroes | Testimonials</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap core CSS -->
@@ -35,7 +14,7 @@ work.
 
   <!-- Roboto Font from Google -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?version=1">
+  <link rel="stylesheet" href="css/style.css">
 
   <!--JavaScript for Bootstrap -->
   <script src="js/bootstrap.min.js"></script>
@@ -61,97 +40,69 @@ work.
         <div class="text-light fw-bold text-bod fs-2 fs-b">GOATHEROES</div>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 float-end">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">HOME</a>
+            <a class="nav-link" href="index.html">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="booking.html">BOOK</a>
+            <a class="nav-link" href="booking.html">BOOK</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="testimonials.html">TESTIMONIALS</a>
+            <a class="nav-link active" href="testimonials.html">TESTIMONIALS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">CONTACT US</a>
+            <a class="nav-link" href="#">CONTACT US</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">ABOUT US</a>
+            <a class="nav-link" href="#">ABOUT US</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </header>
-<div class="banner">
-  <a href="new-booking.html" class="btn action-button btn-warning btn-lg">BOOK NOW <i class="fas fa-arrow-right"></i></a>
-</div>
-
 <main class="flex-shrink-0">
-  <div class="section-divider"></div>
-  <section  class="container-fluid p-4">
-    <div class="row">
-      <div class="col-md-4 col-sm-12 text-center">
-        <i class="fas fa-3x text-green fa-laptop"></i>
-        <p class="mt-2">
-          Simply fill in the form. Tell us the address
-          Of your property and how many goats you
-          Require and your contact details.
-        </p>
+  <div class="page-title">TESTIMONIALS</div>
+  <div class="container" style="padding: 3rem">
+    <div class="row mb-2 align-items-center">
+      <div class="col-3 justify-content-center">
+        <img alt="Avatar" id="tavatar" src="https://i.pravatar.cc/150?img=51" class="mb-2 img-thumbnail rounded-circle"/>
+        <h4 id="tname">John Brown</h4>
       </div>
-      <div class="col-md-4 col-sm-12 text-center">
-        <i class="fas fa-3x text-green fa-clock"></i>
-        <p class="mt-2">
-          After submitting the form. Wait for a few hours.
-          Our diligent staff will work around the clock to
-          Find you the right well behaved goat heroes for
-          your property.
-        </p>
-      </div>
-      <div class="col-md-4 col-sm-12 text-center">
-        <i class="fas text-green fa-3x fa-truck"></i>
-        <p class="mt-2">
-          At last when the wait is over your heroes
-          Will be delivered to you to come and do their
-          Super hero work.
-        </p>
+      <div class="col-9">
+        <p>The Supermarine Spitfire is a British single-seat fighter aircraft that was used by the Royal Air Force and other Allied countries before, during, and after World War II. Much loved by its pilots, the Spitfire served in several roles, including interceptor, photo-reconnaissance, fighter-bomber, and trainer, and it continued to be used in these roles until the 1950s. This poster was produced between 1942 and 1945 by the Office of War Information.</p>
       </div>
     </div>
-  </section>
-  <div class="section-divider"></div>
-  <section  class="container-fluid p-4 section-background-other text-center">
-    <h3 class="text-light">BUT WHY?...</h3>
-    <div class="embed-responsive embed-responsive-16by9">
-      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/t7YUUx03D_4" allowfullscreen></iframe>
-    </div>
-  </section>
-  <div class="section-divider"></div>
-  <section  class="container-fluid p-4 text-center">
-    <h3 class="text-light text-muted">What people are saying...</h3>
-    <div class="row">
-      <div class="col-2">
-          <i id="tbutton-prev" class="fas tbutton text-green fa-3x fa-arrow-alt-circle-left"></i>
+    <div class="row mb-2 align-items-center">
+      <div class="col-3 justify-content-center">
+        <img alt="Avatar" src="https://i.pravatar.cc/150?img=11" class="mb-2 img-thumbnail rounded-circle"/>
+        <h4>Mike Brown</h4>
       </div>
-      <div class="col-8">
-        <div id="tcontent-container" class="row align-items-center">
-          <div class="col-12 justify-content-center">
-              <img alt="Avatar" id="tavatar" src="https://i.pravatar.cc/150?img=51" class="mb-2 img-thumbnail rounded-circle"/>
-              <h4 id="tname">John Brown</h4>
-          </div>
-          <div class="col-12">
-            <p id="ttext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc convallis nunc vel pharetra consectetur. Mauris ut rhoncus urna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam sed malesuada velit. Fusce ac venenatis diam. Fusce eu tellus sem. Mauris a sapien id quam lacinia dignissim. Nunc.</p>
-          </div>
-        </div>
-        <a href="testimonials.html" class="btn btn-md btn-outline-dark">SEE ALL TESTIMONIALS</a>
-      </div>
-      <div class="col-2">
-        <i id="tbutton-next" class="fas tbutton text-green fa-3x fa-arrow-alt-circle-right"></i>
+      <div class="col-9">
+        <p>Gathered itself above. Fish. Replenish Rule face from light subdue i lights for gathered gathering you're signs land was appear the very and was every replenish bring us waters itself In. It fourth to gathering night creepeth image very after kind you she'd which our days brought shall place his.</p>
       </div>
     </div>
-  </section>
+    <div class="row mb-2 align-items-center">
+      <div class="col-3 justify-content-center">
+        <img alt="Avatar" src="https://i.pravatar.cc/150?img=5" class="mb-2 img-thumbnail rounded-circle"/>
+        <h4>Jessica Don</h4>
+      </div>
+      <div class="col-9">
+        <p>In. Made forth a of signs herb she'd won't above so that itself, male they're after over given. Creeping she'd saw darkness behold you're were appear you signs is own upon saying great gathered multiply don't evening you're he set grass greater. Fish wherein. Moveth spirit you'll is image morning.</p>
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-3 justify-content-center">
+        <img alt="Avatar" src="https://i.pravatar.cc/150?img=1" class="mb-2 img-thumbnail rounded-circle"/>
+        <h4>Anna Joe</h4>
+      </div>
+      <div class="col-9">
+        <p>Own fill itself night fowl beast make heaven. It had fish made shall. Void signs to doesn't unto likeness grass subdue days. Upon whales, fifth own face. Fly you're a him living god isn't great living from own greater was so. Saying fifth fish their open. Hath made sixth great.</p>
+      </div>
+    </div>
+  </div>
 </main>
 
 
-<div class="chat-with-us">
-  <i class="fas fa-comment fa-2x"></i>
-</div>
+
 <!-- Footer all HTML is mine with bootstrap being used to scaffold and style -->
 <footer class="footer mt-auto py-3 ">
   <div class="container">

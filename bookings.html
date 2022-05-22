@@ -1,30 +1,20 @@
 <!------------------
-Please note that Bootstrap 5 has been used heavily on this page.
-All JavaScript code in script.js and other files is all my own code.
-The HTML is my own code the only thing that isn't mine is the styling
-provided by Bootstrap all custom files contain 100% my work.
+This page features several interactive elements
 
-Bootstrap classes have been applied to style HTML elements.
+1. Warning Modal when canceling a booking (all triggered with JavaScript)
+2. A detail modal when user wants to view more details (all triggered with JavaScript)
 
-Bootstrap Grid, FlexBox and other layout utilities have been utilised
-to make layout and styling easier.
+All JavaScript functionality is in js/script.js. The page invokes
+the relevant function for it.
 
-Custom style has been incorporated and can be found in css/main.css.
-This should demonstrate my knowledge of CSS.
-All HTML files demonstrate my knowledge and understanding of HTML.
-
-If the marker understands Bootstrap it will be easy to recognise what is mine and
-what isn't. I'm well aware we were not encouraged to use Bootstrap. However, I found
-it appropriate as I have experience using it.
-
-Please note that the webfonts folder has to be in the root. Otherwise, FontAwesome won't
-work.
+Another thing to note is the page dynamically loads the bookings from local storage
+and uses JQuery and string templates to display them in a table.
 !-->
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>GoatHeroes | New Booking</title>
+    <title>GoatHeroes | Bookings</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap core CSS -->
@@ -68,7 +58,7 @@ work.
                         <a class="nav-link active" href="booking.html">BOOK</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">TESTIMONIALS</a>
+                        <a class="nav-link" href="testimonials.html">TESTIMONIALS</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">CONTACT US</a>

@@ -1,24 +1,13 @@
 <!------------------
-Please note that Bootstrap 5 has been used heavily on this page.
-All JavaScript code in script.js and other files is all my own code.
-The HTML is my own code the only thing that isn't mine is the styling
-provided by Bootstrap all custom files contain 100% my work.
+This page contains several things:
 
-Bootstrap classes have been applied to style HTML elements.
+1. JavaScript validation which is achieved through a utility I came up with
+2. Simulation of submission of form to server via a loading spinner with a timeout
+3. Prevention of form submission when form is invalid
+4. validation messages displayed as user types
 
-Bootstrap Grid, FlexBox and other layout utilities have been utilised
-to make layout and styling easier.
-
-Custom style has been incorporated and can be found in css/main.css.
-This should demonstrate my knowledge of CSS.
-All HTML files demonstrate my knowledge and understanding of HTML.
-
-If the marker understands Bootstrap it will be easy to recognise what is mine and
-what isn't. I'm well aware we were not encouraged to use Bootstrap. However, I found
-it appropriate as I have experience using it.
-
-Please note that the webfonts folder has to be in the root. Otherwise, FontAwesome won't
-work.
+All JavaScript logic resides in js/scripts.js and only relevant functions are invoked
+in this page when the dom has loaded.
 !-->
 <!doctype html>
 <html lang="en">
@@ -67,7 +56,7 @@ work.
             <a class="nav-link active" href="booking.html">BOOK</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">TESTIMONIALS</a>
+            <a class="nav-link" href="testimonials.html">TESTIMONIALS</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">CONTACT US</a>
