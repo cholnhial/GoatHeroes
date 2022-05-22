@@ -101,6 +101,14 @@
     border-radius: 5px;
 }
 
+.booking-details-box {
+    background: darkseagreen;
+    color: white;
+    border-radius: 3px;
+    padding: 3px;
+    border: 1px solid darkgreen;;
+}
+
 /* Desktops and Laptops */
 @media (min-width: 1025px) and (max-width: 1280px) {
 

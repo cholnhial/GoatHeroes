@@ -1,6 +1,9 @@
 // Global Variables
 let currentTestimonialIndex =0;
 let testimonialData = [];
+let bookingCancelWarningModal = null; // holds cancellation warning modal
+let bookingDetailsModal = null;
+let bookingIndexToCancel = -1;
 let data = null; // holds all the initial data for the application
 const NON_EMPTY_PATTERN = /([^\s])/; // returns true if none empty
 const NUMERIC_PATTERN = /^\d+$/;
@@ -35,6 +38,16 @@ let bookingFormValidationConfig = [
                 pattern: NON_EMPTY_PATTERN,
                 message: "Please specify your home address"
             }
+        ]
+    },
+    {
+        input: 'address2',
+        rules: [
+        ]
+    },
+    {
+        input: 'state',
+        rules: [
         ]
     },
     {
@@ -93,8 +106,81 @@ let bookingFormValidationConfig = [
                 message: "Your phone number must only contain numbers"
             }
         ]
+    },
+    {
+        input: 'notes',
+        rules: [
+
+        ]
+    },
+    {
+        input: 'city',
+        rules: [
+            {
+                pattern: NON_EMPTY_PATTERN,
+                message: "Your city/suburb cannot be empty"
+            }
+        ]
     }
 ];
+
+/* Main Page */
+$(document).ready(async () => {
+    data = await getData();
+    testimonialData = data.testimonials;
+
+    showInitialTestimony();
+    // connect events for testimonial controls
+    handleTestimonialControls();
+
+});
+
+
+
+/**
+ * Retrieves a form data from validation config
+ *
+ * @param formConfig the validation config
+ * @returns {{}} an object containing the form values
+ */
+function getFormDataFromConfig(formConfig) {
+    let formValues = {};
+
+    formConfig.forEach(fc => {
+        formValues[fc.input] = $(`#${fc.input}`).val();
+    });
+    formValues['status'] = 'Submitted';
+
+    return formValues;
+}
+
+/**
+ * Save a new booking to local storage
+ * @param bookingData the booking form data
+ */
+function saveBooking(bookingData) {
+    let bookings = localStorage.getItem('bookings');
+    if (!bookings) {
+        bookings = [{...bookingData}];
+    } else {
+        bookings = JSON.parse(bookings);
+        bookings = [...bookings, {...bookingData}]
+    }
+
+    localStorage.setItem('bookings', JSON.stringify(bookings));
+}
+
+/**
+ *  Returns a list of bookings from local storage
+ * @returns {*[]|any} the list of bookings
+ */
+function loadBookings() {
+    let bookings = localStorage.getItem('bookings');
+    if (!bookings) {
+        return [];
+    }
+    return JSON.parse(bookings);
+}
 
 /**
  * Processes the validation rules for an input element and
@@ -230,13 +316,153 @@ function handleTestimonialControls () {
     })
 }
 
-$(document).ready(async () => {
-    data = await getData();
-    testimonialData = data.testimonials;
+/**
+ * Connects an event handler for form submission
+ * on booking form.
+ *
+ * simulates sending form to server by showing a spinner
+ * and success feedback.
+ */
+function handleNewBookingFormSubmission() {
+    $('#bookingForm').submit(function(e) {
+        $('#bookingForm').addClass('d-none'); // hide form
+        $('#formSubmitLoading').removeClass('d-none'); // show loading
+        setTimeout(function() { // wait five seconds before showing success
+            $('#formSubmitLoading').addClass('d-none');// hide loading
+            $('#formSubmitSuccess').removeClass('d-none'); // show success
+            saveBooking(getFormDataFromConfig(bookingFormValidationConfig));
+        }, 5000);
+        e.preventDefault();
 
-    showInitialTestimony();
-    // connect events for testimonial controls
-    handleTestimonialControls();
+    });
+}
 
+/**
+ * Invoked on the bookings.html page to show table
+ * of user booked bookings.
+ */
+function showBookings() {
+    let bookings = loadBookings();
+    renderBookings(bookings);
+}
 
-});
+/**
+ * Reloads the bookings so they can be re-rendered after a
+ * change has been made to them
+ */
+function reloadBookings() {
+    $('#bookings').empty();
+    showBookings();
+}
+
+/**
+ * Iterates through the bookings from local storage
+ * and displays them in the table
+ * @param bookings the bookings retrieved
+ */
+function renderBookings(bookings) {
+    bookings.forEach((b, i) => {
+        $('#bookings').append(`
+     <tr>
+        <th>${i}</th>
+        <td class="text-truncate">${b.address}</td>
+        <td  id="booking-status-${i} ${b.status === 'Submitted' ? 'text-success' : 'text-danger'}">${ b.status}</td>
+        <td>
+          <div class="btn-group">
+             <button type="button" data-index="${i}" class="btn booking-details btn-sm btn-outline-primary me-2"><i class="fas fa-eye"></i> VIEW</button>
+             ${b.status !== 'Cancelled' ? '<button type="button"  data-index="'+ i +'" class="btn booking-cancel btn-sm btn-outline-danger"><i class="fas fa-times"></i> CANCEL</button>' : ''}
+         </div>
+       </td>
+      </tr>
+  `)
+    });
+}
+
+/**
+ *  Initialises the booking cancel modal
+ */
+function initBookingCancelWarningModal() {
+    bookingCancelWarningModal = new bootstrap.Modal(document.getElementById('bookingCancelModal'), {});
+}
+
+/**
+ * Initialises modal used to view booking detial
+ */
+function initBookingDetailsModal () {
+    bookingDetailsModal = new bootstrap.Modal(document.getElementById('bookingDetailsModal'), {});
+}
+
+/**
+ * Connects events that deal with the cancellation of a booking
+ *
+ */
+function handleOnBookingCancel() {
+    // these are for each row
+    $(".booking-cancel").on('click', function() {
+        bookingCancelWarningModal.show();
+        bookingIndexToCancel =  Number.parseInt($(this).data('index'));
+    })
+
+    // for the warning modal
+    $('#cancel-booking').on('click', function() {
+        if (bookingIndexToCancel !== -1) {
+            cancelBooking(bookingIndexToCancel);
+            bookingIndexToCancel = -1;
+            // re-render
+            reloadBookings();
+            // re-connect events
+            handleOnBookingCancel();
+            handleOnViewDetails();
+            bookingCancelWarningModal.hide();
+        }
+    });
+}
+
+/**
+ * Handles events related to showing the booking details modal
+ */
+function handleOnViewDetails() {
+    // these are for each row
+    $(".booking-details").on('click', function() {
+        let bookingIndex =  Number.parseInt($(this).data('index'));
+        showBookingDetailsInformation(bookingIndex);
+        bookingDetailsModal.show();
+    })
+
+}
+
+/**
+ * Displays booking details in the modal
+ * given the booking index
+ * @param index the booking index
+ */
+function showBookingDetailsInformation(index) {
+    let bookings = loadBookings();
+    const booking = bookings[index];
+
+    $('#details-address').html(`${booking.address} ${booking.city} ${booking.state} ${booking.postcode}`);
+    $('#details-fn').html(booking.firstName);
+    $('#details-ln').html(booking.lastName);
+    $('#details-goats').html(booking.goats);
+    $('#details-time').html(booking.datetime);
+    $('#details-notes').html(booking.notes);
+    $('#details-phone').html(booking.phone);
+    $('#details-email').html(booking.email);
+
+    if(booking.status === 'Cancelled') {
+        $('#booking-details-status')
+            .removeClass('bg-success')
+            .addClass('bg-danger')
+            .html(booking.status);
+    }
+}
+
+/**
+ * Sets a booking status to cancelled
+ * @param index
+ */
+function cancelBooking(index) {
+    let bookings = loadBookings();
+    bookings[index].status = 'Cancelled';
+    localStorage.setItem('bookings', JSON.stringify(bookings));
+}

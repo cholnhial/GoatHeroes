@@ -1,0 +1,293 @@
+<!------------------
+Please note that Bootstrap 5 has been used heavily on this page.
+All JavaScript code in script.js and other files is all my own code.
+The HTML is my own code the only thing that isn't mine is the styling
+provided by Bootstrap all custom files contain 100% my work.
+
+Bootstrap classes have been applied to style HTML elements.
+
+Bootstrap Grid, FlexBox and other layout utilities have been utilised
+to make layout and styling easier.
+
+Custom style has been incorporated and can be found in css/main.css.
+This should demonstrate my knowledge of CSS.
+All HTML files demonstrate my knowledge and understanding of HTML.
+
+If the marker understands Bootstrap it will be easy to recognise what is mine and
+what isn't. I'm well aware we were not encouraged to use Bootstrap. However, I found
+it appropriate as I have experience using it.
+
+Please note that the webfonts folder has to be in the root. Otherwise, FontAwesome won't
+work.
+!-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GoatHeroes | New Booking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Fontawesome -->
+    <link href="css/all.min.css" rel="stylesheet">
+
+    <!-- Roboto Font from Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?version=2">
+
+    <!--JavaScript for Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <!-- Added to make DOM manipulation and access easy -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <!-- Contains JavaScript code written by me that is relevant to the entire pages -->
+    <script src="js/script.js"></script>
+    <!-- This library is responsible for showing the loading spinner when communicating with backend -->
+    <script src="js/loadingoverlay.min.js"></script>
+</head>
+<body class="d-flex flex-column h-100">
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar goat-heroes-nav navbar-dark fixed-top navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-toggle">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav-toggle">
+                <img class="navbar-brand" src="images/logo.png"/>
+                <div class="text-light fw-bold text-bod fs-2 fs-b">GOATHEROES</div>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 float-end">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="booking.html">BOOK</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">TESTIMONIALS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">CONTACT US</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">ABOUT US</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="flex-shrink-0">
+    <div class="page-title">CURRENT BOOKINGS</div>
+    <div class="container" style="padding-bottom: 8rem">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Booking Number #</th>
+                <th scope="col">Property</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody id="bookings">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Cancel Warning Modal -->
+    <div class="modal fade" id="bookingCancelModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Cancel Booking?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <i class="fas fa-exclamation-triangle text-warning fa-4x mb-2"></i>
+                        <p>Are you sure you want to cancel the booking?</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No, Keep it</button>
+                    <button type="button" id="cancel-booking" class="btn btn-danger">Yes, Cancel it</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Details Modal -->
+    <div class="modal fade" id="bookingDetailsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Booking Details <span id="booking-details-status" class="badge bg-success">Submitted</span>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <h6>Property & Time</h6>
+                            <div class="booking-details-box">
+                                <div class="row">
+                                    <div class="col">
+                                        <label><strong>Date & Time:</strong></label>
+                                    </div>
+                                    <div class="col" id="details-time"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label><strong>Goats:</strong></label>
+                                    </div>
+                                    <div class="col" id="details-goats"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label><strong>Address:</strong></label>
+                                    </div>
+                                    <div class="col-12" id="details-address"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h6>Your Details</h6>
+                            <div class="booking-details-box">
+                                <div class="row">
+                                    <div class="col">
+                                        <label><strong>First Name:</strong></label>
+                                    </div>
+                                    <div class="col" id="details-fn"></div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <label><strong>Last Name:</strong></label>
+                                        </div>
+                                        <div class="col" id="details-ln"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <label><strong>Email</strong></label>
+                                        </div>
+                                        <div class="col" id="details-email">joe@gmail.com</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <label><strong>Phone:</strong></label>
+                                        </div>
+                                        <div class="col" id="details-phone"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 mt-3">
+                          <h6>Notes</h6>
+                        <div class="booking-details-box">
+                          <p id="details-notes">This is just an example of some notes</p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<!-- Footer all HTML is mine with bootstrap being used to scaffold and style -->
+<footer class="footer mt-auto py-3 ">
+    <div class="container">
+        <div class="d-flex align-items-center">
+            <img class="footer-logo me-2" src="images/logo.png"/>
+            <div class="d-block text-start">
+                <div class="text-light fw-bold fs-2">GOATHEROES</div>
+                <p class="fs-6 text-light fw-bold text">WE GOAT YOU</p>
+            </div>
+        </div>
+        <div class="row row-cols-2">
+            <div class="col-sm-6 col-md-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link footer-nav-link" href="#"><strong>BOOK</strong> <i
+                                class="fas fa-angle-right"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link footer-nav-link" href="#">New Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link footer-nav-link" href="#">Current Booking</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link footer-nav-link" href="#"><strong>CONTACT US </strong> <i
+                                class="fas fa-angle-right"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link footer-nav-link" href="#">Feedback</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-6 col-md-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link footer-nav-link" href="#"><strong>ABOUT US</strong> <i
+                                class="fas fa-angle-right"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link footer-nav-link" href="#">Testimonials</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link footer-nav-link" href="#"><strong>TESTIMONIALS</strong> <i
+                                class="fas fa-angle-right"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <div>
+                <h3 class="fw-bold text-light">Get Social</h3>
+                <a href="#"><i class="fab text-light fa-facebook fa-2x me-2"></i></a>
+                <a href="#"><i class="fab text-light fa-instagram  fa-2x me-2"></i></a>
+                <a href="#"><i class="fab text-light fa-twitter  fa-2x"></i></a>
+            </div>
+            <div>
+                <h3 class="fw-bold text-light">Get in touch</h3>
+                <h6 class="text-light">Phone: 07 1234 567</h6>
+                <h6 class="text-light">Email: info@goatheroes.com.au </h6>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around">
+            <a class="footer-nav-link nav-link" href="#">Privacy Policy</a>
+            <a class="footer-nav-link nav-link" href="#">Terms and Conditions</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Page specific JavaScript -->
+<script>
+    $(document).ready(function() {
+        showBookings();
+        initBookingCancelWarningModal();
+        initBookingDetailsModal();
+        // connect events for first time
+        handleOnBookingCancel();
+        handleOnViewDetails();
+    })
+</script>
+</body>
+</html>

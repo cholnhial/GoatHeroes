@@ -116,6 +116,10 @@ work.
            <input type="text" class="form-control" id="address2">
          </div>
          <div class="mb-3">
+           <label for="city" class="form-label">City/Suburb</label>
+           <input type="text" class="form-control" id="city">
+         </div>
+         <div class="mb-3">
            <label for="postcode" class="form-label">Postcode</label>
            <div class="row">
              <div class="col-md-6 col-sm-12">
@@ -267,19 +271,13 @@ work.
 
 <!-- Page specific JavaScript -->
 <script>
-  configureInputValidation(bookingFormValidationConfig, (valid) => {
-    $('#submitBooking').prop('disabled', !valid);
-    $('#bookingForm').submit(function(e) {
-      $('#bookingForm').addClass('d-none'); // hide form
-      $('#formSubmitLoading').removeClass('d-none'); // show loading
-      setTimeout(function() { // wait five seconds before showing success
-        $('#formSubmitLoading').addClass('d-none');// hide loading
-        $('#formSubmitSuccess').removeClass('d-none'); // show success
-      }, 5000);
-        e.preventDefault();
-
+  $(document).ready(function() {
+    configureInputValidation(bookingFormValidationConfig, (valid) => {
+      $('#submitBooking').prop('disabled', !valid);
     });
-  });
+    // connects form submission event
+    handleNewBookingFormSubmission();
+  })
 </script>
 </body>
 </html>
