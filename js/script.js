@@ -11,6 +11,13 @@ const EMAIL_PATTERN = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
 /*
   These are validation rules and messages for booking form
+  I needed something trivial to do validation.
+  So I created this utility as long the format
+  is like this my validation utility will perform
+  validation on every keyup.
+
+  input: specifies the id of the input field
+  rules: [{},...]  specifies a list of validation rules for that field
  */
 let bookingFormValidationConfig = [
     {
@@ -134,7 +141,6 @@ $(document).ready(async () => {
     handleTestimonialControls();
 
 });
-
 
 
 /**
@@ -453,6 +459,11 @@ function showBookingDetailsInformation(index) {
         $('#booking-details-status')
             .removeClass('bg-success')
             .addClass('bg-danger')
+            .html(booking.status);
+    } else {
+        $('#booking-details-status')
+            .removeClass('bg-danger')
+            .addClass('bg-success')
             .html(booking.status);
     }
 }
