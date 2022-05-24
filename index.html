@@ -161,8 +161,33 @@ code is to be found in js/script.js
 </main>
 
 
-<div class="chat-with-us">
-  <i class="fas fa-comment fa-2x"></i>
+<div id="chat-start" class="chat-with-us">
+  <i  class="fas fa-comment fa-2x"></i>
+</div>
+<div id="chat" class="chat card d-none text-white bg-chat">
+  <div class="card-header">
+    <i id="chat-minimize" class="fas fa-minus float-end"></i>
+  </div>
+  <div class="card-body p-0">
+    <div class="chat-header">
+      <div class="row">
+        <div class="col-9">
+          <h5>Hi, I'm Jane</h5>
+          <h6>How can I help today?</h6>
+        </div>
+        <div class="col-3">
+          <img class="img-thumbnail rounded-circle" src="https://i.pravatar.cc/64" alt="chat Avatar" />
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-footer">
+    <div class="input-group mb-3">
+      <input id="chat-input" type="text" class="form-control" placeholder="Hello..." >
+      <button id="btn-chat-send" class="btn btn-outline-success">SEND</button>
+    </div>
+  </div>
 </div>
 <!-- Footer all HTML is mine with bootstrap being used to scaffold and style -->
 <footer class="footer mt-auto py-3 ">

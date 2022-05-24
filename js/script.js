@@ -140,6 +140,9 @@ $(document).ready(async () => {
     // connect events for testimonial controls
     handleTestimonialControls();
 
+    // connect chat events
+    handleChatEvents();
+
 });
 
 
@@ -476,4 +479,24 @@ function cancelBooking(index) {
     let bookings = loadBookings();
     bookings[index].status = 'Cancelled';
     localStorage.setItem('bookings', JSON.stringify(bookings));
+}
+
+/**
+ * Connects events related to chat
+ */
+function handleChatEvents() {
+
+    // on start chat
+    $('#chat-start').on('click', function() {
+       $('#chat').toggleClass('d-none');
+        $("#chat").removeClass('animate__object move__fadeOut');
+        restartAnimation('#chat', 'animate__object move__bounceInDown')
+    });
+
+    $('#chat-minimize').on('click', function() {
+        $('#chat').toggleClass('d-none');
+        $("#chat").removeClass('animate__object move__bounceInDown');
+        restartAnimation('#chat', 'animate__object move__fadeOut');
+
+    });
 }
