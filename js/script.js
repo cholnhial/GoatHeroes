@@ -131,6 +131,29 @@ let bookingFormValidationConfig = [
     }
 ];
 
+/* Validation config for feedback form */
+let feedbackFormValidationConfig = [
+    {
+        input: 'fullName',
+        rules: [
+            {
+                pattern: NON_EMPTY_PATTERN,
+                message: "Your name cannot be empty"
+            }
+        ]
+    },
+    {
+        input: 'feedback',
+        rules: [
+            {
+                pattern: NON_EMPTY_PATTERN,
+                message: "You must provide some feedback"
+            }
+        ]
+    }
+];
+
+
 /**
  *  Used to simulate the live chat
  * @type {string[]}
@@ -149,7 +172,7 @@ const  the10commandments = [
 ];
 
 
-/* Main Page */
+/* main() */
 $(document).ready(async () => {
     data = await getData();
     testimonialData = data.testimonials;
@@ -248,7 +271,7 @@ function runValidationForInput(inputId,value, validationsConfig) {
 function configureInputValidation(validationsConfig, onSuccess) {
     validationsConfig.forEach(vc => {
         $(`#${vc.input}`).on('keyup', (e) => {
-            runValidationForInput(vc.input, e.target.value, bookingFormValidationConfig);
+            runValidationForInput(vc.input, e.target.value, validationsConfig);
             if(isFormValid(validationsConfig)) {
                 onSuccess(true); // call callback function
             } else {
@@ -359,6 +382,22 @@ function handleNewBookingFormSubmission() {
             $('#formSubmitLoading').addClass('d-none');// hide loading
             $('#formSubmitSuccess').removeClass('d-none'); // show success
             saveBooking(getFormDataFromConfig(bookingFormValidationConfig));
+        }, 5000);
+        e.preventDefault();
+
+    });
+}
+
+/**
+ * Handles the submission of a feedback
+ */
+function handleNewFeedbackFormSubmission() {
+    $('#feedbackForm').submit(function(e) {
+        $('#feedbackForm').addClass('d-none'); // hide form
+        $('#formSubmitLoading').removeClass('d-none'); // show loading
+        setTimeout(function() { // wait five seconds before showing success
+            $('#formSubmitLoading').addClass('d-none');// hide loading
+            $('#formSubmitSuccess').removeClass('d-none'); // show success
         }, 5000);
         e.preventDefault();
 
