@@ -197,7 +197,8 @@
     background-color: #d96c06;
 }
 
-/* Animations for Fading In from Left */
+
+/* Animations for Fading In from Left  - these animations are generated*/
 .animate__object {
     animation-duration: 1s;
     animation-fill-mode: both;
@@ -324,4 +325,111 @@
 }
 
 /* End Animations */
+
+/* CHAT */
+.chat-area {
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    overflow-y: scroll;
+    height: 14rem;
+}
+
+.chat-area > .bubble {
+    border-radius: 1em;
+    padding: 0.25em 0.75em;
+    margin: 0.0625em;
+    max-width: 50%;
+}
+
+.chat-area > .bubble.sender {
+    align-self: flex-start;
+    background-color: cornflowerblue;
+    color: #fff;
+}
+.chat-area > .bubble.recipient {
+    align-self: flex-end;
+    background-color: var(--ghthirdary);
+}
+
+
+/* Generated from Animation generating App */
+.dots {
+    width: 50px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: var(--ghthirdary);
+    margin: 10px;
+    transform: scale(0);
+    -webkit-animation: overall-scale 8s infinite;
+    animation: overall-scale 8s infinite;
+}
+.dot {
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: dot-scale;
+    animation-name: dot-scale;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 5px 0px;
+    border-radius: 10px;
+    background-color: #444;
+    transform: scale(0.65);
+}
+.dot:first-of-type {
+    margin-left: 6px;
+}
+.dot:nth-of-type(2) {
+    -webkit-animation-delay: 0.15s;
+    animation-delay: 0.15s;
+}
+.dot:nth-of-type(3) {
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+}
+@-webkit-keyframes dot-scale {
+    0%,
+    70% {
+        transform: scale(0.65);
+    }
+    35% {
+        transform: scale(1);
+    }
+}
+@keyframes dot-scale {
+    0%,
+    70% {
+        transform: scale(0.65);
+    }
+    35% {
+        transform: scale(1);
+    }
+}
+@-webkit-keyframes overall-scale {
+    0%,
+    95% {
+        transform: scale(0);
+    }
+    5%,
+    90% {
+        transform: scale(1);
+    }
+}
+@keyframes overall-scale {
+    0%,
+    95% {
+        transform: scale(0);
+    }
+    5%,
+    90% {
+        transform: scale(1);
+    }
+}
+/* End generated */
+/* END CHAT */
 

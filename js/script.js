@@ -8,7 +8,7 @@ let data = null; // holds all the initial data for the application
 const NON_EMPTY_PATTERN = /([^\s])/; // returns true if none empty
 const NUMERIC_PATTERN = /^\d+$/;
 const EMAIL_PATTERN = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-
+let chatMessageCounter = 0;
 /*
   These are validation rules and messages for booking form
   I needed something trivial to do validation.
@@ -131,6 +131,24 @@ let bookingFormValidationConfig = [
     }
 ];
 
+/**
+ *  Used to simulate the live chat
+ * @type {string[]}
+ */
+const  the10commandments = [
+    "Thou shalt have no other gods before Me.",
+    "Thou shalt not make idols.",
+    "Thou shalt not take the name of the LORD thy God in vain.",
+    "Remember the Sabbath day, to keep it holy.",
+    "Honor thy father and thy mother.",
+    "Thou shalt not murder.",
+    "Thou shalt not commit adultery.",
+    "Thou shalt not steal.",
+    "Thou shalt not bear false witness against thy neighbor.",
+    "Thou shalt not covet thy neighbour’s wife, thou shalt not covet thy neighbour’s house ."
+];
+
+
 /* Main Page */
 $(document).ready(async () => {
     data = await getData();
@@ -144,6 +162,7 @@ $(document).ready(async () => {
     handleChatEvents();
 
 });
+
 
 
 /**
@@ -499,4 +518,55 @@ function handleChatEvents() {
         restartAnimation('#chat', 'animate__object move__fadeOut');
 
     });
+
+    $('#btn-chat-send').on('click', function() {
+       sendChatMessage();
+    });
+
+    $('#chat-input').on('keyup', function(e) {
+       if (e.which === 13) {
+            sendChatMessage();
+       }
+    });
+}
+
+function simulateRandomResponse(messageNumber) {
+
+    let randomTimeout = Math.floor((Math.random() * 5000) + 3000);
+    const message = the10commandments[Math.floor((Math.random() * 9) + 0)];
+
+    setTimeout(() => {
+        $(`#chat-user-message-${messageNumber}`).remove(); // remove typing indicator
+        $('#chat-area').append(`<div class="bubble recipient">${message}</div>`);
+        scrollToBottomOfChat();
+    }, randomTimeout);
+
+}
+
+/**
+ * Smooth scroll to the bottom of chat on new message
+ */
+function scrollToBottomOfChat() {
+    const chatArea = $('#chat-area');
+    chatArea.animate({
+        scrollTop: chatArea[0].scrollHeight
+    }, 1000);
+}
+
+/* Simulates sending a message in live chat */
+function sendChatMessage() {
+    chatMessageCounter++;
+    $('#chat-area').append(`
+      <div class="bubble sender">${$('#chat-input').val()}</div>
+      <div id="chat-user-message-${chatMessageCounter}" class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+    </div>
+    `);
+    scrollToBottomOfChat();
+    $('#chat-input').val(""); // clear input
+
+    // simulate a response
+    simulateRandomResponse(chatMessageCounter);
 }
