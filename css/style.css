@@ -128,7 +128,7 @@
         color: white;
         padding: 1rem;
         /* #273C2C */
-        background-image: url("/images/noise.png");
+        background-image: url("../images/noise.png");
         background-repeat: repeat;
         border-radius: 5px;
     }
