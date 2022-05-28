@@ -171,10 +171,23 @@ const  the10commandments = [
     "Thou shalt not covet thy neighbour’s wife, thou shalt not covet thy neighbour’s house ."
 ];
 
+// to correctly offset bootstrap fixed navbar
+// gets rid of a pesky issue where the content
+// of the page is hidden by header
+var onResizeAdjustBodyPaddingTop = function() {
+    $("body").css("padding-top", $(".goat-heroes-nav").height());
+};
 
 /* main() */
 $(document).ready(async () => {
-    data = await getData();
+
+    // we want to set the body padding on resize
+    $(window).resize(onResizeAdjustBodyPaddingTop);
+
+    // initial call
+    onResizeAdjustBodyPaddingTop();
+
+    data =  getData();
     testimonialData = data.testimonials;
 
     showInitialTestimony();
@@ -335,13 +348,33 @@ function showInitialTestimony() {
  * Used to get the data object containing testimonials
  * etc.
  *
- * @returns {Promise<Response>} the data retrieved
+ * @returns object the data retrieved
  */
-async function getData() {
-    return fetch('files/data/data.json')
-        .then(async function(resp) {
-            return await resp.json();
-        });
+function getData() {
+    return {
+        "testimonials": [
+            {
+                "name": "John Brown",
+                "avatar": "https://i.pravatar.cc/150?img=51",
+                "testimony": "The Supermarine Spitfire is a British single-seat fighter aircraft that was used by the Royal Air Force and other Allied countries before, during, and after World War II. Much loved by its pilots, the Spitfire served in several roles, including interceptor, photo-reconnaissance, fighter-bomber, and trainer, and it continued to be used in these roles until the 1950s. This poster was produced between 1942 and 1945 by the Office of War Information."
+            },
+            {
+                "name": "Mike Brown",
+                "avatar": "https://i.pravatar.cc/150?img=11",
+                "testimony": "Gathered itself above. Fish. Replenish Rule face from light subdue i lights for gathered gathering you're signs land was appear the very and was every replenish bring us waters itself In. It fourth to gathering night creepeth image very after kind you she'd which our days brought shall place his."
+            },
+            {
+                "name": "Jessica Don",
+                "avatar": "https://i.pravatar.cc/150?img=5",
+                "testimony": "In. Made forth a of signs herb she'd won't above so that itself, male they're after over given. Creeping she'd saw darkness behold you're were appear you signs is own upon saying great gathered multiply don't evening you're he set grass greater. Fish wherein. Moveth spirit you'll is image morning."
+            },
+            {
+                "name": "Anna Joe",
+                "avatar": "https://i.pravatar.cc/150?img=1",
+                "testimony": "Own fill itself night fowl beast make heaven. It had fish made shall. Void signs to doesn't unto likeness grass subdue days. Upon whales, fifth own face. Fly you're a him living god isn't great living from own greater was so. Saying fifth fish their open. Hath made sixth great."
+            }
+        ]
+    };
 }
 
 /**

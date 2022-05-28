@@ -57,7 +57,7 @@
 .banner {
     background: url('../images/banner.png') no-repeat center center;
     background-size: cover;
-    background-position-y: 30px;
+    background-position-y: 9px;
     height: 550px;
 }
 
@@ -110,11 +110,6 @@
     border: 1px solid darkgreen;;
 }
 
-/* Desktops and Laptops */
-@media (min-width: 1025px) and (max-width: 1280px) {
-
-}
-
 /* Smartphones */
 @media (min-width: 320px) and (max-width: 480px) {
 
@@ -135,7 +130,7 @@
 
 
     .banner {
-        background-position-y: 60%;
+        background-position-y: 12%;
         background-size: contain;
         height: 18rem;
         width: auto;
@@ -149,6 +144,56 @@
     }
 
 }
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .banner {
+        background-position-y: -50%;
+        background-position-x: 0%;
+        background-size: cover;
+        height: 32rem;
+        width: auto;
+    }
+
+    .action-button {
+        position: relative;
+        top: 80%;
+        left: 5rem;
+    }
+
+}
+
+/* Desktops and Laptops */
+@media (min-width: 1024px) and (max-width: 1280px) {
+    .banner {
+        background-position-y: -50%;
+        background-position-x: 40%;
+        background-size: cover;
+        height: 32rem;
+        width: auto;
+    }
+}
+
+/* Large screens  */
+@media only screen and (min-width : 1680px) and (max-width: 1920px) {
+    .banner {
+        background: url('../images/banner.png') no-repeat center center;
+        background-size: cover;
+        background-position-y: 22%;
+        height: 550px;
+    }
+}
+
+/* Large screens  - 4K */
+@media only screen and (min-width : 2560px) and (max-width: 3920px) {
+    .banner {
+        background: url('../images/banner.png') no-repeat center center;
+        background-size: cover;
+        background-position-y: 22%;
+        height: 800px;
+    }
+}
+
 
 .bg-chat {
     --bs-bg-opacity: 1;
@@ -196,6 +241,20 @@
     color: white;
     font-size: 2.5em;
     background-color: #d96c06;
+}
+
+.map{
+    overflow:hidden;
+    padding-bottom:56.23%;
+    position:relative;
+    height:0;
+}
+.map iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
 }
 
 

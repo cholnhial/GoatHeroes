@@ -17,15 +17,12 @@
   <link rel="stylesheet" href="css/style.css">
 
   <!--JavaScript for Bootstrap -->
-  <script src="js/bootstrap.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
 
   <!-- Added to make DOM manipulation and access easy -->
   <script src="js/jquery-3.6.0.min.js"></script>
   <!-- Contains JavaScript code written by me that is relevant to the entire pages -->
   <script src="js/script.js"></script>
-  <!-- This library is responsible for showing the loading spinner when communicating with backend -->
-  <script src="js/loadingoverlay.min.js"></script>
 </head>
 <body class="d-flex flex-column h-100">
 <header>
@@ -59,22 +56,26 @@
     </div>
   </nav>
 </header>
-<main class="flex-shrink-0">
-  <section class="container" style="padding: 8rem">
+<main class="flex-shrink-0 mt-4">
+  <section class="container p-3">
     <section class="text-center">
       <h1><strong>GoatHeroes Pty Ltd</strong></h1>
       <h4>ABN 12345678</h4>
     </section>
     <section class="row">
-      <div class="col">
+      <div class="col-md-6 col-sm-12">
         <h2>Where to find us?</h2>
-        <iframe class="rounded-3" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7075.823045145185!2d152.99537807599128!3d-27.534207767801902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b9150108198e365%3A0x1ecbfffbe3582c1!2sBrisbane%20Markets%2C%20385%20Sherwood%20Rd%2C%20Rocklea%20QLD%204106!5e0!3m2!1sen!2sau!4v1653719406100!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div id="google-map" class="map" style="height: 500px">
+        <iframe class="rounded-3 embed-responsive embed-responsive-16by9"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7075.823045145185!2d152.99537807599128!3d-27.534207767801902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b9150108198e365%3A0x1ecbfffbe3582c1!2sBrisbane%20Markets%2C%20385%20Sherwood%20Rd%2C%20Rocklea%20QLD%204106!5e0!3m2!1sen!2sau!4v1653719406100!5m2!1sen!2sau"
+                style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
-      <div class="col">
+      <div class="col-md-6 col-sm-12">
         <h2>Goat questions?</h2>
         <h6><strong>Phone: </strong> 071234 5678</h6>
         <h6><strong>Email: </strong> info@goatheroes.com.au</h6>
-        <div style="margin-top: 5rem">
+        <div class="text-center" style="margin-top: 5rem">
           <h2>Do you have feedback for us?</h2>
           <a href="feedback.html" class="btn btn-success btn-lg">Feedback</a>
         </div>
